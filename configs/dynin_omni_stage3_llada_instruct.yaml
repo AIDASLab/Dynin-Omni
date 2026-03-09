@@ -1,0 +1,183 @@
+wandb:
+  entity: null
+  resume: "auto"
+
+experiment:
+  project: "dynin-omni-training-stage3"
+  name: "dynin-omni-training-stage3"
+  output_dir: "ckpt/dynin_omni/dynin-omni-training-stage3"
+  save_every: 1000
+  eval_every: null
+  generate_every: null
+  log_every: 1
+  log_grad_norm_every: 100
+  resume_from_checkpoint: "latest"
+
+model:
+  vq_model_image:
+    type: "magvitv2"
+    repo_id: "snu-aidas/magvitv2"
+    vq_model_name: ${model.vq_model_image.repo_id}
+  vq_model_audio:
+    type: "emova"
+    repo_id: "snu-aidas/emova_speech_tokenizer_hf"
+    vq_model_name: ${model.vq_model_audio.repo_id}
+  dynin_omni:
+    repo_id: "snu-aidas/Dynin-Omni"
+    tokenizer_repo_id: "snu-aidas/Dynin-Omni"
+    pretrained_model_path: ${model.dynin_omni.repo_id}
+    tokenizer_path: ${model.dynin_omni.tokenizer_repo_id}
+    local_files_only: false
+    w_clip_vit: false
+    new_vocab_size: 138752
+    llm_vocab_size: 126464
+    codebook_size: 8192
+    num_vq_tokens: 1024
+    num_new_special_tokens: 3
+    tie_word_embeddings: false
+  gradient_checkpointing: true
+
+dataset:
+  hf:
+    cache_dir: "datasets/huggingface"
+  gen_type: "pass"
+  und_type: "pass"
+  combined_loader_mode: "max_size_cycle"
+  sources:
+    t2i:
+      - id: "flux_reason"
+        dataset_id: "LucasFang/FLUX-Reason-6M"
+    lm:
+      - id: "openr1_math_220k"
+        dataset_id: "open-r1/OpenR1-Math-220k"
+        config: "all"
+        split: "train"
+        user_key: "problem"
+        assistant_key: "solution"
+    video:
+      - id: "llavavid"
+        dataset_id: "lmms-lab/LLaVA-Video-178K"
+    speech:
+      - dataset_id: "openslr/librispeech_asr"
+        config: "clean"
+        split: "all"
+  params:
+    t2i_dataset: "flux_reason"
+    t2i_split: "train"
+    hqedit_split: "train"
+
+    flux_reason_dataset_name: "LucasFang/FLUX-Reason-6M"
+    flux_reason_score_threshold: 8.0
+
+    hf_instruction_lm:
+      split: "train"
+      max_samples_per_source: 300000
+      max_total_samples: 3000000
+      seed: 42
+      sources: ${dataset.sources.lm}
+
+    reasoning_sft_csv:
+      csv_path: null
+      seed: 42
+      max_total_samples: null
+
+    video_speech_dataset:
+      use_llavavid: true
+      llavavid_dataset_name: "llavavid"
+      llavavid_path: "lmms-lab/LLaVA-Video-178K"
+      llavavid_local_files_only: false
+      v2t_sample_method: "uniform_sequential"
+      llavavid_max_video_seconds: 10
+      llavavid_max_samples: 500000
+      llavavid_sample_seed: 42
+      llavavid_skip_configs:
+        - "llava_hound"
+        - "0_30_s_activitynetqa"
+        - "30_60_s_activitynetqa"
+        - "1_2_m_activitynetqa"
+        - "2_3_m_activitynetqa"
+        - "0_30_s_activitynet"
+        - "30_60_s_activitynet"
+        - "1_2_m_activitynet"
+        - "2_3_m_activitynet"
+      llavavid_skip_video_patterns:
+        - "activitynet"
+
+    num_workers: 1
+    resolution: 336
+    t2i_resolution: 512
+    audio_data: ${dataset.sources.speech}
+    pin_memory: true
+    persistent_workers: true
+    dataloader_timeout: 0
+
+  speech_token_cache:
+    enable: true
+    root: "cache/speech_tokens"
+    max_items_in_memory: 4096
+
+  preprocessing:
+    max_seq_length: 128
+    max_seq_length_text: 1024
+    max_seq_length_lm_input: 1024
+    max_seq_length_mmu: 256
+    max_seq_length_mmu_input: 256
+    max_seq_length_s2t: 128
+    max_seq_length_t2i: 128
+    max_seq_length_t2s: 128
+    max_aud_length: 512
+    max_aud_length_short: 256
+    resolution: 224
+    center_crop: false
+    random_flip: false
+
+optimizer:
+  name: adamw
+  params:
+    learning_rate: 0.00002
+    scale_lr: false
+    beta1: 0.9
+    beta2: 0.999
+    weight_decay: 0.01
+    epsilon: 1e-8
+
+lr_scheduler:
+  scheduler: "cosine"
+  params:
+    learning_rate: ${optimizer.params.learning_rate}
+    warmup_steps: 1000
+    min_lr_scale: 0.1
+
+training:
+  gradient_accumulation_steps: 8
+  noise_type: "mask"
+  batch_size_t2i: 1
+  batch_size_lm: 1
+  batch_size_mmu: 0
+  batch_size_v2t: 1
+  batch_size_s2t: 0
+  batch_size_t2s: 0
+
+  mixed_precision: "bf16"
+  enable_tf32: true
+  seed: 10086
+  max_train_steps: 1000000
+  max_train_epochs: NONE
+  overfit_one_batch: false
+  cond_dropout_prob: 0.1
+  min_masking_rate: 0.0
+  label_smoothing: 0.0
+  max_grad_norm: 3
+  guidance_scale: 3.5
+  generation_timesteps: 42
+
+  t2i_coeff: 1.0
+  i2i_coeff: 0.0
+  lm_coeff: 2.0
+  mmu_coeff: 0.0
+  v2t_coeff: 0.5
+  t2s_coeff: 0.0
+  s2t_coeff: 0.0
+
+mask_schedule:
+  schedule: "cosine"

@@ -1,0 +1,14 @@
+{
+  "00000": {
+    "id": "dog.png",
+    "prompt": "Turn the scene into a snowy winter park while keeping the dog's pose and identity."
+  },
+  "00001": {
+    "id": "llava1.jpg",
+    "prompt": "Change the lighting to warm golden hour and keep all objects in the same positions."
+  },
+  "00002": {
+    "id": "sofa_under_water.jpg",
+    "prompt": "Transform this surreal underwater setting into a realistic indoor living room while preserving the sofa layout."
+  }
+}

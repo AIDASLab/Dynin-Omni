@@ -1,0 +1,5 @@
+{"file_name":"clevr.jpg","prompt":"<|start_header_id|>user<|end_header_id|>\nHow many objects are visible in this image?<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"}
+{"file_name":"geo.jpg","prompt":"<|start_header_id|>user<|end_header_id|>\nGiven the diagram, explain briefly how you would solve for angle CAB.<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"}
+{"file_name":"docvqa.png","prompt":"<|start_header_id|>user<|end_header_id|>\nWhat text appears in the top-most boxed area of the document?<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"}
+{"file_name":"ai2d.png","prompt":"<|start_header_id|>user<|end_header_id|>\nAccording to the food web, what happens if phytoplankton decreases? Answer with one short sentence.<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"}
+{"file_name":"llava2.jpg","prompt":"<|start_header_id|>user<|end_header_id|>\nWhat is the title of the book shown in the image?<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n"}

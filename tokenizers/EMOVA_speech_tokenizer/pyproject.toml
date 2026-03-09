@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "emova_speech_tokenizer"
+version = "1.0.0"
+description = "Empowering Language Models to See, Hear and Speak with Vivid Emotions"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+]
+dependencies = [
+    # install torch first
+    "torch",
+    "transformers==4.47.1", "tokenizers==0.21.2", "pandas", "sentencepiece==0.1.99",
+    "monotonic_align", "librosa==0.8.0", "phonemizer", "unidecode",
+    "hydra-core==1.3.2", "pytorch_lightning==1.1.0",
+    "wget", "wrapt", "onnx==1.12.0", "frozendict",
+    "inflect", "braceexpand", "webdataset", "torch_stft",
+    "sox", "editdistance", "numpy==1.23.5", "protobuf==3.20.0",
+]
+
+[project.optional-dependencies]
+npu = [
+    "pyyaml", "decorator", "scipy", "attrs", "psutil",
+    "torch_npu", 
+]
+train = ["ninja", "wandb"]
+build = ["build", "twine"]
+
+[project.urls]
+"Homepage" = "https://emova-ollm.github.io/"
+"Bug Tracker" = "https://github.com/emova-ollm/emova_speech_tokenizer/issues"
+
+[tool.setuptools.packages.find]
+exclude = ["assets*", "benchmark*", "docs", "dist*", "playground*", "scripts*", "tests*"]
+
+[tool.wheel]
+exclude = ["assets*", "benchmark*", "docs", "dist*", "playground*", "scripts*", "tests*"]

@@ -1,0 +1,14 @@
+# Shared constraints for Dynin-Omni + EMOVA tokenizer environment
+# Keep this file focused on cross-package conflict points.
+
+numpy==1.23.5
+protobuf==3.20.0
+
+transformers==4.47.1
+tokenizers==0.21.2
+
+# opencv-python-headless>=4.13 requires numpy>=2, which conflicts with EMOVA.
+opencv-python-headless==4.10.0.84
+
+# Prevent heavy resolver backtracking under protobuf/numpy constraints.
+onnx==1.12.0

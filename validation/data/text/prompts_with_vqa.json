@@ -1,0 +1,45 @@
+[
+  {
+    "file_name": "dog.png",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Please describe the main subject in this image."
+      }
+    ]
+  },
+  {
+    "file_name": "llava1.jpg",
+    "messages": [
+      {
+        "role": "user",
+        "content": "What are the colors of the bus?"
+      },
+      {
+        "role": "assistant",
+        "content": "The bus is white and red."
+      },
+      {
+        "role": "user",
+        "content": "What feature is visible on top of the bus?"
+      }
+    ]
+  },
+  {
+    "file_name": "llava2.jpg",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Who wrote this book? Answer with a short phrase."
+      },
+      {
+        "role": "assistant",
+        "content": "Clear Englebert."
+      },
+      {
+        "role": "user",
+        "content": "What is the title of this book?"
+      }
+    ]
+  }
+]
