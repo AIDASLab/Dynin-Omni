@@ -70,6 +70,7 @@ Create and activate a conda environment, then install dependencies:
 ```bash
 conda create -n dynin_vllm python=3.12
 conda activate dynin_vllm
+pip install vllm --torch-backend=auto
 pip install -e . # in vllm-omni directory
 ```
 
