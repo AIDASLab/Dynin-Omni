@@ -54,54 +54,7 @@ Training proceeds in three stages: (1) modality adaptation, (2) omni-modal super
 
 ## vLLM-Omni
 
-Dynin-Omni inference is supported via the [vLLM-Omni](https://github.com/vllm-project/vllm-omni) framework using the `dynin_omni` branch in the AIDASLab fork. Follow the instructions below. A Pull Request to the upstream [vLLM-Omni](https://github.com/vllm-project/vllm-omni) repository is in preparation. This section will be updated after the Pull Request is merged.
-
-Clone the [AIDASLab/vllm-omni](https://github.com/AIDASLab/vllm-omni.git) repository (`dynin_omni` branch):
-
-```bash
-git clone https://github.com/AIDASLab/vllm-omni.git -b dynin_omni
-cd vllm-omni
-```
-
-<br>
-
-Create and activate a conda environment, then install dependencies:
-
-```bash
-conda create -n dynin_vllm python=3.12
-conda activate dynin_vllm
-pip install vllm --torch-backend=auto
-pip install -e . # in vllm-omni directory
-```
-
-<br>
-
-Set up the runtime environment:
-
-```bash
-REPO_ROOT=$(pwd)
-PYTHON_BIN=$(which python) bash "$REPO_ROOT/vllm_omni/model_executor/models/dynin_omni/models/configs/speech/install_emova_deps.sh"
-```
-
-<br>
-
-Run inference on vLLM-Omni using the entrypoint script:
-
-```bash
-bash examples/offline_inference/dynin_omni/run_single_prompt.sh [task] [options]
-```
-
-Available tasks:
-
-- `t2t`: text → text
-- `i2t`: image → text (Image Understanding)
-- `s2t`: speech → text (ASR)
-- `t2i`: text → image (Image Generation)
-- `t2s`: text → speech (TTS)
-- `i2i`: image → image (Image Editing)
-- `v2t`: video → text (Video Understanding)
-
-For detailed usage and task-specific arguments, use the `-h` option.
+Dynin-Omni support is planned to be integrated into [vLLM-Omni](https://github.com/vllm-project/vllm-omni) in version `0.18.0`. Once the integration is released, this section will be updated with the official setup and usage instructions.
 
 <br>
 
