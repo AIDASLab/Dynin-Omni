@@ -52,6 +52,12 @@ Training proceeds in three stages: (1) modality adaptation, (2) omni-modal super
 
 <br>
 
+## Notifications
+
+Integration with [dInfer](https://github.com/inclusionAI/dInfer) is currently in progress. Integration with [sglang](https://github.com/sgl-project/sglang) is planned next.
+
+<br>
+
 ## vLLM-Omni
 
 Dynin-Omni support is planned to be integrated into [vLLM-Omni](https://github.com/vllm-project/vllm-omni) in version `0.18.0`. Once the integration is released, this section will be updated with the official setup and usage instructions.
