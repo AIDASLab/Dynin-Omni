@@ -4,9 +4,9 @@
 
 <html>
   <p align="center">
-    <a href="https://github.com/AIDASLab/Dynin-Omni/blob/main/Dynin_Omni_paper.pdf">
+    <a href="https://arxiv.org/abs/2604.00007">
       <img
-        src="https://img.shields.io/badge/preprint-Paper-white"
+        src="https://img.shields.io/badge/arXiv-Paper-red?logo=arXiv&logoColor=red"
         alt="Dynin-Omni paper"
       />
     </a>
@@ -291,6 +291,19 @@ Stage 3 starts from the Stage 2 checkpoint specified in `configs/dynin_omni_stag
 ## Evaluation
 
 Evaluation details are provided in [evaluation/README.md](evaluation/README.md).
+
+<br>
+
+## Citation
+
+```text
+@article{aidaslab2026dyninomni,
+  title={Dynin-Omni: Omnimodal Unified Large Diffusion Language Model},
+  author={Kim, Jaeik and Kim, Woojin and Hong, Jihwan and Lee, Yejoon and Hyeon, Sieun and Lim, Mintaek and Han, Yunseok and Kim, Dogeun and Lee, Hoeun and Kim, Hyunggeun and Do, Jaeyoung},
+  journal={arXiv preprint arXiv:2604.00007},
+  year={2026}
+}
+```
 
 <br>
 
