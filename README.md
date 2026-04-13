@@ -60,7 +60,7 @@ Integration with [dInfer](https://github.com/inclusionAI/dInfer) is currently in
 
 ## vLLM-Omni
 
-Dynin-Omni support is planned to be integrated into [vLLM-Omni](https://github.com/vllm-project/vllm-omni) in version `0.18.0`. Once the integration is released, this section will be updated with the official setup and usage instructions.
+Dynin-Omni support has been merged into [vLLM-Omni](https://github.com/vllm-project/vllm-omni) through [PR #1759](https://github.com/vllm-project/vllm-omni/pull/1759) and is scheduled to be included in version `0.19.0`. Once `0.19.0` is released, this section will be updated with the official setup and usage instructions.
 
 <br>
 
